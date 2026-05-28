@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANSTR11 - Termux Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+    
+    <!-- POPUP WARNING MUNCUL SETELAH 5 DETIK -->
+    <div id="warningPopup" class="popup">
+        <div class="popup-box">
+            <h2>WARNING</h2>
+            <p>Website ini berisi tools Termux. Gunakan dengan bijak!</p>
+            <div class="popup-buttons">
+                <button id="btnOnline">ONLINE</button>
+                <button id="btnOffline">OFFLINE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOADING 0-100% -->
+    <div id="loadingScreen" class="screen">
+        <div class="loading-box">
+            <h1>VANSTR11</h1>
+            <p id="loadingText">Connecting to server 0%</p>
+            <div class="progress-bar"><div id="progress"></div></div>
+        </div>
+    </div>
+
+    <!-- LOGIN + VIDEO BACKGROUND -->
+    <div id="loginScreen" class="screen">
+        <video autoplay muted loop playsinline id="bgVideo">
+            <source src="monitor.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+        
+        <div class="login-box">
+            <h2>VANSTR11 LOGIN</h2>
+            <form id="loginForm">
+                <div class="input-box">
+                    <input type="text" id="username" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit">ACCESS TOOLS</button>
+            </form>
+            <p id="errorMsg"></p>
+        </div>
+    </div>
+
+    <!-- MENU UTAMA 20 TOOLS + VIDEO BACKGROUND -->
+    <div id="mainMenu" class="screen">
+        <video autoplay muted loop playsinline id="toolsBgVideo">
+            <source src="termux.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay-tools"></div>
+
+        <!-- POPUP MALWARE MUNCUL 2 DETIK SETELAH TOOLS KEBuka -->
+        <div id="malwarePopup" class="popup">
+            <div class="popup-box-malware">
+                <h2>PERINGATAN!!!</h2>
+                <p>APK INI MENGANDUNG MALWARE<br>SEGERA LOGOUT!</p>
+                <div class="popup-buttons">
+                    <button id="btnReset">RESET</button>
+                    <button id="btnLanjut">LANJUT</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1 class="title">VANSTR11 TERMUX TOOLS</h1>
+<div class="tools-grid">
+    <a href="https://github.com/Cabbagec/termux-ohmyzsh" target="_blank" class="tool-card"><h3>1. Oh My Zsh</h3><p>Install Oh My Zsh + Powerlevel10k di Termux</p><span>Updated 2026</span></a>
+    
+    <a href="https://github.com/adi1090x/termux-style" target="_blank" class="tool-card"><h3>2. Termux Style</h3><p>250+ tema warna & font buat Termux</p><span>1.2k Stars</span></a>
+    
+    <a href="https://github.com/Gameye98/Lazymux" target="_blank" class="tool-card"><h3>3. Lazymux</h3><p>Installer 50+ tools hacking otomatis</p><span>Active</span></a>
+    
+    <a href="https://github.com/htr-tech/zphisher" target="_blank" class="tool-card"><h3>4. Zphisher</h3><p>Phishing tool 37 template + cloudflared</p><span>6.5k Stars</span></a>
+    
+    <a href="https://github.com/thewhiteh4t/seeker" target="_blank" class="tool-card"><h3>5. Seeker</h3><p>Lacak lokasi target akurat via link</p><span>GPS Precision</span></a>
+    
+    <a href="https://github.com/termux/termux-api" target="_blank" class="tool-card"><h3>6. Termux API</h3><p>Akses kamera, SMS, GPS Android dari Termux</p><span>Official</span></a>
+    
+    <a href="https://github.com/sherlock-project/sherlock" target="_blank" class="tool-card"><h3>7. Sherlock</h3><p>OSINT: Cari username di 400+ sosmed</p><span>60k Stars</span></a>
+    
+    <a href="https://github.com/sqlmapproject/sqlmap" target="_blank" class="tool-card"><h3>8. SQLmap</h3><p>Tools otomatis detect & exploit SQL injection</p><span>32k Stars</span></a>
+    
+    <a href="https://github.com/rajkumardusad/Tool-X" target="_blank" class="tool-card"><h3>9. Tool-X</h3><p>Install 370+ hacking tools sekali klik</p><span>All in One</span></a>
+    
+    <a href="https://github.com/mishakorzik/AllHackingTools" target="_blank" class="tool-card"><h3>10. AllHackingTools</h3><p>500+ tools hacking untuk Termux</p><span>Updated</span></a>
+    
+    <a href="https://github.com/kinghacker0/WishFish" target="_blank" class="tool-card"><h3>11. WishFish</h3><p>Ambil foto kamera depan target via link</p><span>Camera Hack</span></a>
+    
+    <a href="https://github.com/OnlineHacking/MaskPhish" target="_blank" class="tool-card"><h3>12. MaskPhish</h3><p>Sembunyiin link phishing jadi link YouTube</p><span>URL Masking</span></a>
+    
+    <a href="https://github.com/htr-tech/nexphisher" target="_blank" class="tool-card"><h3>13. NexPhisher</h3><p>Phishing tool generasi baru 70+ site</p><span>2026 Version</span></a>
+    
+    <a href="https://github.com/threat9/routersploit" target="_blank" class="tool-card"><h3>14. RouterSploit</h3><p>Exploitation framework buat router</p><span>Exploit DB</span></a>
+    
+    <a href="https://github.com/Mebus/cupp" target="_blank" class="tool-card"><h3>15. CUPP</h3><p>Bikin wordlist custom buat bruteforce</p><span>Wordlist Gen</span></a>
+    
+    <a href="https://github.com/Tuhinshubhra/RED_HAWK" target="_blank" class="tool-card"><h3>16. RED HAWK</h3><p>All in one info gathering & vuln scanner</p><span>Scanner</span></a>
+    
+    <a href="https://github.com/1N3/Sn1per" target="_blank" class="tool-card"><h3>17. Sn1per</h3><p>Automated pentest recon framework</p><span>Pentest</span></a>
+    
+    <a href="https://github.com/vanhauser-thc/thc-hydra" target="_blank" class="tool-card"><h3>18. THC-Hydra</h3><p>Bruteforce login tercepat: SSH, FTP, HTTP</p><span>Bruteforce</span></a>
+    
+    <a href="https://github.com/htr-tech/evilginx2" target="_blank" class="tool-card"><h3>19. Evilginx2</h3><p>MITM framework buat bypass 2FA</p><span>2FA Bypass</span></a>
+    
+    <a href="https://github.com/nmap/nmap" target="_blank" class="tool-card"><h3>20. Nmap</h3><p>Network scanner & port discovery</p><span>Network Scan</span></a>
+</div>
+            <footer>© 2026 VANSTR11 | Use at your own risk</footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+  </html>
