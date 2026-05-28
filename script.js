@@ -1,118 +1,140 @@
-// EFEK CMATRIX BACKGROUND - LANGSUNG JALAN
+const suaraKlik = document.getElementById('suaraKlik');
+const laguLanjut = document.getElementById('laguLanjut');
+const laguOnline = document.getElementById('laguOnline');
+const malwarePopup = document.getElementById('malwarePopup');
+const btnLanjut = document.getElementById('btnLanjut');
+const btnReset = document.getElementById('btnReset');
+const btnOnline = document.getElementById('btnOnline');
+const btnOffline = document.getElementById('btnOffline');
+const warningPopup = document.getElementById('warningPopup');
+const loadingScreen = document.getElementById('loadingScreen');
+const loginScreen = document.getElementById('loginScreen');
+const mainMenu = document.getElementById('mainMenu');
+const loginForm = document.getElementById('loginForm');
+const errorMsg = document.getElementById('errorMsg');
+
+let getarInterval;
+
+// MUNCULIN WARNING PERTAMA SETELAH 5 DETIK
+setTimeout(() => {
+    warningPopup.style.display = 'flex';
+}, 5000);
+
+// TOMBOL ONLINE - TAMBAH NYALAIN lagu2.mp3
+btnOnline.onclick = () => {
+    warningPopup.style.display = 'none';
+    loadingScreen.style.display = 'flex';
+
+    // TAMBAHAN: NYALAIN LAGU ONLINE
+    laguOnline.currentTime = 0;
+    laguOnline.play();
+
+    let progress = 0;
+    const progressBar = document.getElementById('progress');
+    const loadingText = document.getElementById('loadingText');
+    const interval = setInterval(() => {
+        progress += 2;
+        progressBar.style.width = progress + '%';
+        loadingText.innerText = `Connecting to server ${progress}%`;
+        if(progress >= 100){
+            clearInterval(interval);
+            loadingScreen.style.display = 'none';
+            loginScreen.style.display = 'flex';
+        }
+    }, 50);
+};
+
+// TOMBOL OFFLINE
+btnOffline.onclick = () => {
+    alert('Mode offline belum tersedia');
+};
+
+// LOGIN - TAMBAH MATIIN lagu2.mp3
+loginForm.onsubmit = (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if(username === "vanstr" && password === "113100") {
+        // TAMBAHAN: MATIIN LAGU ONLINE PAS MASUK TOOLS
+        laguOnline.pause();
+        laguOnline.currentTime = 0;
+
+        loginScreen.style.display = 'none';
+        mainMenu.style.display = 'block';
+
+        setTimeout(() => {
+            malwarePopup.style.display = 'flex';
+        }, 2000);
+    } else {
+        errorMsg.innerText = 'Username / Password salah!';
+    }
+};
+
+// TOMBOL LANJUT - TAMBAH NYALAIN lagu.mp3
+btnLanjut.onclick = () => {
+    suaraKlik.currentTime = 0;
+    suaraKlik.play();
+
+    // TAMBAHAN: NYALAIN lagu.mp3
+    laguLanjut.currentTime = 0;
+    laguLanjut.play();
+
+    if ("vibrate" in navigator) {
+        clearInterval(getarInterval);
+        getarInterval = setInterval(() => {
+            navigator.vibrate(500);
+        }, 1000);
+    }
+
+    malwarePopup.style.display = 'none';
+};
+
+// TOMBOL RESET - TAMBAH STOP SEMUA LAGU
+btnReset.onclick = () => {
+    navigator.vibrate(0);
+    clearInterval(getarInterval);
+
+    // TAMBAHAN: STOP SEMUA LAGU
+    laguOnline.pause();
+    laguLanjut.pause();
+
+    location.reload();
+};
+
+// STOP GETAR KALO TUTUP TAB
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        navigator.vibrate(0);
+        clearInterval(getarInterval);
+    }
+});
+
+// MATRIX EFFECT - UTUH GAK DIUBAH
 const canvas = document.getElementById('matrix');
 const ctx = canvas.getContext('2d');
-
-function resizeCanvas() {
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-}
-resizeCanvas();
-
-const letters = '01ABCDEFVANSTR11';
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = [];
-for(let x = 0; x < columns; x++) drops[x] = 1;
-
-function drawMatrix() {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const nums = '0123456789';
+const alphabet = katakana + latin + nums;
+const fontSize = 16;
+const columns = canvas.width/fontSize;
+const rainDrops = [];
+for(let x = 0; x < columns; x++) rainDrops[x] = 1;
+const draw = () => {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#0F0';
     ctx.font = fontSize + 'px monospace';
-    for(let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-    }
-}
-let matrixInterval = setInterval(drawMatrix, 33);
-window.addEventListener('resize', resizeCanvas);
-
-// LOGIC UTAMA
-document.addEventListener('DOMContentLoaded', function() {
-    const popup = document.getElementById('warningPopup');
-    const loadingScreen = document.getElementById('loadingScreen');
-    const loginScreen = document.getElementById('loginScreen');
-    const mainMenu = document.getElementById('mainMenu');
-    const malwarePopup = document.getElementById('malwarePopup');
-    
-    // 1. MUNCULIN POPUP SETELAH 5 DETIK
-    setTimeout(() => { popup.style.display = 'flex'; }, 5000);
-
-    // 2. OFFLINE = KELUAR
-    document.getElementById('btnOffline').onclick = () => window.location.href = 'about:blank';
-
-    // 3. ONLINE = MULAI LOADING
-    document.getElementById('btnOnline').onclick = function() {
-        popup.style.display = 'none';
-        loadingScreen.style.display = 'flex';
-        startLoading();
-    };
-
-    // 4. LOADING 10 DETIK, ABIS ITU MUNCUL LOGIN
-    function startLoading() {
-        let progress = 0;
-        const loadingText = document.getElementById('loadingText');
-        const progressBar = document.getElementById('progress');
-        let interval = setInterval(() => {
-            progress++;
-            progressBar.style.width = progress + '%';
-            loadingText.innerText = `Connecting to server ${progress}%`;
-            if (progress >= 100) {
-                clearInterval(interval);
-                loadingScreen.style.display = 'none';
-                loginScreen.style.display = 'flex';
-            }
-        }, 100);
-    }
-
-    // 5. LOGIC LOGIN
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault(); 
-        const user = document.getElementById('username').value;
-        const pass = document.getElementById('password').value;
-        const errorMsg = document.getElementById('errorMsg');
-
-        // GANTI USERNAME & PASSWORD DI SINI
-        const usernameBenar = 'vanstr11';
-        const passwordBenar = '113100';
-
-        if (user === usernameBenar && pass === passwordBenar) {
-            errorMsg.innerText = '';
-            clearInterval(matrixInterval); // MATIIN CMATRIX BIAR GAK BERAT
-            canvas.style.display = 'none';
-            loginScreen.style.display = 'none';
-            mainMenu.style.display = 'flex';
-            
-            // MUNCULIN POPUP MALWARE SETELAH 2 DETIK
-            setTimeout(() => {
-                malwarePopup.style.display = 'flex';
-            }, 2000);
-        } else {
-            errorMsg.innerText = 'Username atau Password salah!';
+    for(let i = 0; i < rainDrops.length; i++) {
+        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+        if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+            rainDrops[i] = 0;
         }
-    });
-
-    // 6. LOGIC TOMBOL POPUP MALWARE
-    document.getElementById('btnReset').onclick = function() {
-        malwarePopup.style.display = 'none';
-        mainMenu.style.display = 'none';
-        loginScreen.style.display = 'flex';
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
-        // NYALAIN LAGI CMATRIX DI LOGIN
-        canvas.style.display = 'block';
-        matrixInterval = setInterval(drawMatrix, 33);
-    };
-
-    document.getElementById('btnLanjut').onclick = function() {
-        malwarePopup.style.display = 'none';
-    };
-
-    // 7. FALLBACK KALO VIDEO ERROR
-    const video1 = document.getElementById('bgVideo');
-    const video2 = document.getElementById('toolsBgVideo');
-    if(video1) video1.onerror = () => { canvas.style.display = 'block'; }
-    if(video2) video2.onerror = () => { canvas.style.display = 'block'; }
-});
+        rainDrops[i]++;
+    }
+};
+setInterval(draw, 30);
