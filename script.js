@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const errorMsg = document.getElementById('errorMsg');
 
         // GANTI USERNAME & PASSWORD DI SINI
-        const usernameBenar = 'admin';
-        const passwordBenar = '12345';
+        const usernameBenar = 'vanstr11';
+        const passwordBenar = '11310';
 
         if (user === usernameBenar && pass === passwordBenar) {
             errorMsg.innerText = '';
