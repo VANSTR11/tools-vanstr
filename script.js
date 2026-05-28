@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // GANTI USERNAME & PASSWORD DI SINI
         const usernameBenar = 'vanstr11';
-        const passwordBenar = '11310';
+        const passwordBenar = '113100';
 
         if (user === usernameBenar && pass === passwordBenar) {
             errorMsg.innerText = '';
