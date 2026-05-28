@@ -1,0 +1,22 @@
+{
+  "name": "VANSTR11 TOOLS",
+  "short_name": "VANSTR11",
+  "description": "Kumpulan 20 Tools Termux Terbaik 2026",
+  "start_url": "/tools-vanstr/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ff00",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512", 
+      "type": "image/png"
+    }
+  ]
+}
