@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+}
+
+body {
+    background: #000;
+    color: #0F0;
+    overflow: hidden;
+}
+
+#matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: block!important;
+}
+
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+#loginScreen, #mainMenu {
+    background: rgba(0,0,0,0.85);
+}
+
+/* POPUP WARNING */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 20;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-box {
+    background: #111;
+    border: 2px solid #F00;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 20px #F00;
+    animation: glitch 1s infinite;
+}
+
+.popup-box h2 { color: #F00; margin-bottom: 15px; font-size: 28px; }
+.popup-box p { color: #FFF; margin-bottom: 20px; font-size: 14px; }
+.popup-buttons { display: flex; justify-content: space-between; }
+.popup-buttons button { padding: 10px 20px; border: none; cursor: pointer; font-weight: bold; width: 45%; }
+#btnOnline { background: #0F0; color: #000; }
+#btnOffline { background: #F00; color: #FFF; }
+
+/* LOADING SCREEN */
+.loading-box { text-align: center; }
+.loading-box h1 { font-size: 40px; color: #0F0; text-shadow: 0 0 10px #0F0; margin-bottom: 20px; }
+#loadingText { margin-bottom: 15px; font-size: 18px; }
+.progress-bar { width: 300px; height: 20px; border: 2px solid #0F0; margin: 0 auto; }
+#progress { width: 0%; height: 100%; background: #0F0; box-shadow: 0 0 10px #0F0; transition: width 0.1s linear; }
+
+/* VIDEO BACKGROUND */
+#bgVideo, #toolsBgVideo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2;
+    transform: translateX(-50%) translateY(-50%);
+    object-fit: cover;
+}
+
+.video-overlay,.video-overlay-tools {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: -1;
+}
+
+/* LOGIN BOX */
+.login-box {
+    background: rgba(0, 20, 0, 0.85);
+    border: 2px solid #0F0;
+    padding: 40px;
+    width: 320px;
+    box-shadow: 0 0 20px #0F0;
+    backdrop-filter: blur(5px);
+    z-index: 15;
+}
+.login-box h2 { text-align: center; margin-bottom: 30px; text-shadow: 0 0 10px #0F0; }
+.input-box { position: relative; margin-bottom: 30px; }
+.input-box input { width: 100%; padding: 10px 0; background: transparent; border: none; border-bottom: 2px solid #0F0; outline: none; color: #FFF; font-size: 16px; }
+.input-box label { position: absolute; top: 10px; left: 0; color: #0F0; pointer-events: none; transition: 0.3s; }
+.input-box input:focus ~ label,.input-box input:valid ~ label { top: -15px; font-size: 12px; color: #FFF; }
+.login-box button { width: 100%; padding: 10px; background: #0F0; border: none; color: #000; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px #0F0; }
+.login-box button:hover { background: #FFF; }
+#errorMsg { color: #F00; text-align: center; margin-top: 15px; height: 20px; font-size: 14px; }
+
+/* MAIN MENU */
+#mainMenu { overflow-y: auto; align-items: flex-start; padding: 40px 20px; }
+.container { max-width: 1000px; width: 100%; z-index: 5; }
+.title { text-align: center; font-size: 35px; margin-bottom: 30px; text-shadow: 0 0 15px #0F0; animation: flicker 2s infinite; }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+.tool-card { background: rgba(0, 20, 0, 0.7); border: 1px solid #0F0; padding: 20px; text-decoration: none; color: #0F0; transition: 0.3s; backdrop-filter: blur(3px); }
+.tool-card:hover { background: rgba(0, 255, 0, 0.1); box-shadow: 0 0 15px #0F0; transform: translateY(-5px); }
+.tool-card h3 { margin-bottom: 10px; color: #FFF; }
+.tool-card p { font-size: 14px; margin-bottom: 15px; color: #AAA; }
+.tool-card span { font-size: 12px; color: #0F0; }
+footer { text-align: center; font-size: 12px; color: #555; }
+
+/* POPUP MALWARE MERAH */
+.popup-box-malware {
+    background: #1a0000;
+    border: 2px solid #F00;
+    padding: 20px;
+    width: 280px;
+    text-align: center;
+    box-shadow: 0 0 25px #F00;
+    animation: shake 0.5s infinite;
+}
+.popup-box-malware h2 { color: #F00; margin-bottom: 15px; font-size: 24px; text-shadow: 0 0 10px #F00; }
+.popup-box-malware p { color: #FFF; margin-bottom: 20px; font-size: 14px; line-height: 1.4; }
+#btnReset { background: #FF0; color: #000; }
+#btnLanjut { background: #F00; color: #FFF; }
+
+@keyframes glitch {
+    0% { transform: translate(0) } 20% { transform: translate(-2px, 2px) } 40% { transform: translate(-2px, -2px) }
+    60% { transform: translate(2px, 2px) } 80% { transform: translate(2px, -2px) } 100% { transform: translate(0) }
+}
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; } 20%, 24%, 55% { opacity: 0.4; }
+}
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
